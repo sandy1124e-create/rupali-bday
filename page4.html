@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dosti Page 💞</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffe6f0, #fff0fa);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    color: #800040;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .photo {
+    width: 280px;
+    height: 280px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    margin-bottom: 30px;
+    animation: fadeIn 2s ease;
+  }
+
+  p {
+    max-width: 85%;
+    font-size: 1.2em;
+    line-height: 1.6em;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(255,182,193,0.6);
+    animation: textFade 2.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.8);}
+    to {opacity: 1; transform: scale(1);}
+  }
+
+  @keyframes textFade {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  button {
+    margin-top: 40px;
+    padding: 12px 24px;
+    border: none;
+    background: #ff4da6;
+    color: white;
+    font-size: 1.1em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(255,105,180,0.5);
+  }
+
+  button:hover {
+    background: #e60073;
+    transform: scale(1.05);
+  }
+</style>
+</head>
+<body>
+
+<!-- 💞 Replace the photo below with your own -->
+<img src="your-photo.jpg" alt="Our Memory" class="photo">
+
+<p>
+Humari dosti life ki sabse purest unexpected aur never ending dosti hai ☺,<br><br>
+Hum dost bane they filhall soil internship ke baad,<br>
+Aur dhere dhere kaise itni badi hume pata hi nhi chala,<br><br>
+Ye keh sakte hai ki bhagwan ne ye sab plan Kiye the kyuki itni achi sirf upar wala hi plan kar sakta hai,<br><br>
+Haa pehle pehle aapko mujhpe bharosa nhi hua tha, lekin mai bhi toh aapka bhakt hu aakhir kaar aapka bharosa jit liya,<br>
+ab aap meri itni achi dost ho ki aap meri devi ho.
+</p>
+
+<button onclick="nextPage()">Next Page ➤</button>
+
+<script>
+  function nextPage() {
+    window.location.href = "page5.html"; // ✅ link to next page
+  }
+</script>
+
+</body>
+</html>

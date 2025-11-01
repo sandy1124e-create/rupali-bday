@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gifts 🎁</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #ffe6f2, #ff99cc);
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  h1 {
+    color: #b3005a;
+    font-size: 2em;
+    animation: floatTitle 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes floatTitle {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+  }
+
+  .gift-box {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background-color: #ff4da6;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
+
+  .gift-box::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 150px;
+    background-color: #fff;
+    left: 65px;
+    top: 0;
+  }
+
+  .gift-lid {
+    position: absolute;
+    width: 150px;
+    height: 40px;
+    background-color: #e60073;
+    top: -40px;
+    left: 0;
+    border-radius: 8px;
+    transition: all 0.5s ease;
+  }
+
+  .gift-lid::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 40px;
+    background-color: #fff;
+    left: 65px;
+    top: 0;
+  }
+
+  button {
+    margin-top: 30px;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    background: #b3005a;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background: #ff1a8c;
+  }
+
+  .message {
+    font-size: 1.8em;
+    color: #800040;
+    margin-top: 20px;
+    display: none;
+  }
+
+  .next-btn {
+    display: none;
+    background: #660033;
+  }
+
+  /* Confetti */
+  .confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    animation: fall 3s linear infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<h1>🎁 Gifts 🎁</h1>
+
+<div class="gift-box" id="giftBox">
+  <div class="gift-lid" id="giftLid"></div>
+</div>
+
+<button id="openBtn">Open Gift</button>
+<div class="message" id="message">Kal milega 🎁</div>
+<button class="next-btn" id="nextPage" onclick="window.location.href='page14.html'">Next Page →</button>
+
+<script>
+  const openBtn = document.getElementById('openBtn');
+  const lid = document.getElementById('giftLid');
+  const message = document.getElementById('message');
+  const nextBtn = document.getElementById('nextPage');
+
+  openBtn.addEventListener('click', () => {
+    lid.style.transform = 'rotateX(150deg)';
+    lid.style.top = '-100px';
+    openBtn.style.display = 'none';
+    message.style.display = 'block';
+    nextBtn.style.display = 'block';
+    playConfetti();
+    playPopSound();
+  });
+
+  function playConfetti() {
+    for (let i = 0; i < 30; i++) {
+      let confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+      confetti.style.left = Math.random() * window.innerWidth + 'px';
+      confetti.style.animationDuration = 2 + Math.random() * 3 + 's';
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 5000);
+    }
+  }
+
+  function playPopSound() {
+    const sound = new Audio('https://cdn.pixabay.com/audio/2022/03/15/audio_b81b86c6b8.mp3');
+    sound.play();
+  }
+</script>
+
+</body>
+</html>
