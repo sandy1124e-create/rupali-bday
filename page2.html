@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Guess Time 😏</title>
+<style>
+  body {
+    background-color: #fff3e6;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    padding: 40px 10px;
+    overflow: hidden;
+  }
+
+  h1 {
+    color: #ff4d4d;
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 25px;
+  }
+
+  .options-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    min-height: 400px;
+    position: relative;
+  }
+
+  button {
+    background-color: #ffd6cc;
+    border: 2px solid #ff6666;
+    border-radius: 12px;
+    padding: 12px 50px;
+    font-size: 18px;
+    color: #333;
+    cursor: pointer;
+    transition: 0.3s ease;
+    width: 220px;
+  }
+
+  button:hover {
+    background-color: #ff9999;
+    transform: scale(1.05);
+  }
+
+  #behen {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @media (max-width: 768px) {
+    button {
+      width: 80%;
+    }
+  }
+</style>
+</head>
+<body>
+  <h1>Chalo shi guess kiya 😮‍💨<br>Galat guess nhi kiya!</h1>
+  <p>Acha lekin ek baar firse guess kiya jaaye ki aap hai kon 😅</p>
+  <p><b>Sandip aapko kya kehke bulata hai?</b></p>
+
+  <div class="options-container">
+    <button id="bestfriend">BESTFRIEND</button>
+    <button id="monu">MONU</button>
+    <button id="devi">DEVI</button>
+    <button id="pagal">PAGAL</button>
+    <button id="behen">BEHEN</button>
+  </div>
+
+<script>
+  // Protect 2nd page access
+  const allowedNames = [
+    "monu",
+    "devi",
+    "rupali",
+    "rupali devi",
+    "rupali jaiswal",
+    "rupali akhilesh jaiswal"
+  ];
+  const correctBday = "22-11-2005";
+  const storedName = localStorage.getItem("username");
+  const storedBday = localStorage.getItem("birthday");
+
+  // block if not from index.html with correct data
+  if (
+    !storedName ||
+    !storedBday ||
+    !allowedNames.includes(storedName.toLowerCase()) ||
+    storedBday !== correctBday
+  ) {
+    alert("Access denied 😭 ispe sirf jiska bday hai usi ka hi access hai!");
+    window.location.href = "index.html";
+  }
+
+  const behen = document.getElementById("behen");
+  const devi = document.getElementById("devi");
+  const wrongIds = ["bestfriend", "monu", "pagal"];
+  let moveCount = 0;
+
+  // Randomly move BEHEN (for laptop)
+  function moveBehen() {
+    const maxX = window.innerWidth - 150;
+    const maxY = window.innerHeight - 200;
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+    behen.style.left = `${x}px`;
+    behen.style.top = `${y}px`;
+  }
+
+  // Desktop hover (move 3 times, then hide)
+  behen.addEventListener("mouseenter", () => {
+    if (!isMobile()) {
+      if (moveCount < 3) {
+        moveBehen();
+        moveCount++;
+      } else {
+        alert("kyu time pass kar raho 😭 shi choose karo na!");
+        behen.style.display = "none"; // hide after prompt
+      }
+    }
+  });
+
+  // Mobile tap (hide after prompt)
+  behen.addEventListener("click", () => {
+    if (isMobile()) {
+      alert("zyada nhi ho rha aapka 😤 chup chap shi choose karo timepass mat karo");
+      behen.style.display = "none"; // hide after showing alert
+    }
+  });
+
+  // Wrong buttons disappear after clicking
+  wrongIds.forEach((id) => {
+    const btn = document.getElementById(id);
+    btn.addEventListener("click", () => {
+      alert(`${id.toUpperCase()} thik hai par shi nhi 😜`);
+      btn.style.display = "none";
+    });
+  });
+
+  // Correct answer (DEVI)
+  devi.addEventListener("click", () => {
+    alert("Sahi pakde hai 😎");
+    window.location.href = "page3.html";
+  });
+
+  function isMobile() {
+    return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  }
+</script>
+</body>
+</html>

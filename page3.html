@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Devi Question 😏</title>
+<style>
+  body {
+    background-color: #ffe6f0;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    padding: 40px 10px;
+    overflow: hidden;
+  }
+
+  h1 {
+    color: #e60073;
+    font-size: 28px;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .options-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+  }
+
+  button {
+    background-color: #ffb3d9;
+    border: 2px solid #e60073;
+    border-radius: 14px;
+    padding: 12px 50px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #4d0033;
+    cursor: pointer;
+    transition: 0.3s ease;
+    width: 220px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  button:hover {
+    background-color: #ff66b3;
+    transform: scale(1.05);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    button {
+      width: 80%;
+    }
+  }
+</style>
+</head>
+<body>
+  <h1>Aap apne bhakt ko kya kehke bulate ho Devi? 😅</h1>
+
+  <div class="options-container">
+    <button onclick="goNext('🫏 GADHA')">🫏 GADHA</button>
+    <button onclick="goNext('🐷 SUAR')">🐷 SUAR</button>
+    <button onclick="goNext('🤪 PAGAL')">🤪 PAGAL</button>
+    <button onclick="goNext('😭 ROTDU')">😭 ROTDU</button>
+    <button onclick="goNext('🙏 BHAKT')">🙏 BHAKT</button>
+  </div>
+
+<script>
+  // Protect this page as well
+  const allowedNames = [
+    "monu",
+    "devi",
+    "rupali",
+    "rupali devi",
+    "rupali jaiswal",
+    "rupali akhilesh jaiswal"
+  ];
+  const correctBday = "22-11-2005";
+  const storedName = localStorage.getItem("username");
+  const storedBday = localStorage.getItem("birthday");
+
+  if (
+    !storedName ||
+    !storedBday ||
+    !allowedNames.includes(storedName.toLowerCase()) ||
+    storedBday !== correctBday
+  ) {
+    alert("Access denied 😭 ispe sirf jiska bday hai usi ka hi access hai!");
+    window.location.href = "index.html";
+  }
+
+  function goNext(option) {
+    localStorage.setItem("chosenWord", option);
+    window.location.href = "page4.html";
+  }
+</script>
+</body>
+</html>

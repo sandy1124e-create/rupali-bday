@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Access 🎂</title>
+  <style>
+    body {
+      background-color: #fff5f7;
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    h1 {
+      font-size: 30px;
+      color: #ff4d6d;
+      margin-bottom: 40px;
+    }
+
+    input, button {
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 2px solid #ff4d6d;
+      font-size: 16px;
+      margin: 10px;
+      outline: none;
+    }
+
+    button {
+      background-color: #ffb3c1;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ffccd5;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Arey aap idhar aaye toh galti se toh nhi aaye honge 😏<br>
+  Aaj aapka b'day hai?</h1>
+
+  <p><b>Toh likho apna naam aur birthdate 🎉</b></p>
+
+  <input type="text" id="nameInput" placeholder="Enter your name"><br>
+  <input type="date" id="bdayInput"><br>
+  <button id="checkBtn">Enter 🎂</button>
+
+  <script>
+    const allowedNames = ["monu", "devi", "rupali", "rupali devi", "rupali jaiswal", "rupali akhilesh jaiswal"];
+    const correctDate = "22-11-2005";
+
+    document.getElementById("checkBtn").addEventListener("click", () => {
+      const name = document.getElementById("nameInput").value.trim().toLowerCase();
+      const dateInput = document.getElementById("bdayInput").value;
+
+      if (!name || !dateInput) {
+        alert("Pehle naam aur birthdate likho 😅");
+        return;
+      }
+
+      // Convert date format from yyyy-mm-dd → dd-mm-yyyy
+      const parts = dateInput.split("-");
+      const formatted = parts[2] + "-" + parts[1] + "-" + parts[0];
+
+      if (allowedNames.includes(name) && formatted === correctDate) {
+        // Store in localStorage for page2 access
+        localStorage.setItem("username", name);
+        localStorage.setItem("birthday", formatted);
+
+        alert("Sahi jawab 😎 chalo agla step!");
+        window.location.href = "page2.html";
+      } else {
+        alert("Shi choose karona 😭\nGalat naam ya date likha hai!");
+      }
+    });
+  </script>
+
+</body>
+</html>
