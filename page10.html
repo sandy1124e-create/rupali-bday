@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aap Bohot Ache Ho 💗</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #fff0f5, #ffe6f2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    color: #4b004b;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .photo {
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    margin-bottom: 25px;
+    animation: fadeIn 2s ease;
+  }
+
+  p {
+    max-width: 85%;
+    font-size: 1.15em;
+    line-height: 1.7em;
+    background: rgba(255,255,255,0.85);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 18px rgba(255,105,180,0.4);
+    animation: textFade 2.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.8);}
+    to {opacity: 1; transform: scale(1);}
+  }
+
+  @keyframes textFade {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  .btn-container {
+    margin-top: 40px;
+  }
+
+  button {
+    padding: 12px 28px;
+    border: none;
+    background: #ff6fa0;
+    color: white;
+    font-size: 1.1em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(255,105,180,0.5);
+  }
+
+  button:hover {
+    background: #e60073;
+    transform: scale(1.05);
+  }
+
+  .sparkle {
+    position: absolute;
+    color: #ff69b4;
+    font-size: 18px;
+    animation: sparkleFloat 6s linear infinite;
+  }
+
+  @keyframes sparkleFloat {
+    0% {transform: translateY(0) scale(1); opacity: 1;}
+    100% {transform: translateY(-100vh) scale(1.5); opacity: 0;}
+  }
+</style>
+</head>
+<body>
+
+<!-- 💗 Replace this with your actual image -->
+<img src="your-photo.jpg" alt="Memory Pic" class="photo">
+
+<p>
+Aap sachme bohot ache ho 💖<br><br>
+Mere liye ghr walo se risk lena. Meghana se risk lena.<br><br>
+Mere saath hazar jhagde ke baad bhi mujhe maaf karna.<br><br>
+Mai joh kuch bhi kar lu par iss janam mei aapki dosti ki bharpai nhi karpaunga,
+isiliye kuch gift chahiye toh mang lena, waise bhi aapne bola hai ki aap time aane pe ek gift mangoge toh mai ruka bohot 💞<br><br>
+Bas mai itna chahta hu ki aise hi humari aakhir ki ty jaaye.<br><br>
+Fir aap mujhe block kar dena mai kuch nhi bolunga <b>promise 🤞</b>
+</p>
+
+<div class="btn-container">
+  <button onclick="nextPage()">Next Page ➤</button>
+</div>
+
+<script>
+  // Floating sparkle hearts
+  function createSparkle() {
+    const sparkle = document.createElement("div");
+    sparkle.classList.add("sparkle");
+    sparkle.innerHTML = "✨";
+    sparkle.style.left = Math.random() * 100 + "vw";
+    sparkle.style.animationDuration = 4 + Math.random() * 2 + "s";
+    document.body.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 6000);
+  }
+  setInterval(createSparkle, 500);
+
+  // Next page prompt and redirect
+  function nextPage() {
+    alert("Chalo aage badte hai bohot emotional baate ho gyi, haa bas mere saath ty ke end Tak aise hi rehna thik hai 💕");
+    window.location.href = "page11.html";
+  }
+</script>
+
+</body>
+</html>

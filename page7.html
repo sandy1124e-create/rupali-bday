@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dosti Aur Devi ❤️</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #fff0f5, #ffe6f2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    color: #4a004a;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .photo {
+    width: 280px;
+    height: 280px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    margin-bottom: 30px;
+    animation: fadeIn 2s ease;
+  }
+
+  p {
+    max-width: 85%;
+    font-size: 1.15em;
+    line-height: 1.7em;
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(255,105,180,0.5);
+    animation: textFade 2.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.8);}
+    to {opacity: 1; transform: scale(1);}
+  }
+
+  @keyframes textFade {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  .btn-container {
+    margin-top: 40px;
+  }
+
+  button {
+    padding: 12px 28px;
+    border: none;
+    background: #ff5fad;
+    color: white;
+    font-size: 1.1em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(255,105,180,0.5);
+  }
+
+  button:hover {
+    background: #e60073;
+    transform: scale(1.05);
+  }
+
+  /* Floating heart animation */
+  .heart {
+    position: absolute;
+    color: #ff69b4;
+    font-size: 20px;
+    animation: floatHearts 6s linear infinite;
+  }
+
+  @keyframes floatHearts {
+    0% {transform: translateY(0) scale(1); opacity: 1;}
+    100% {transform: translateY(-100vh) scale(1.8); opacity: 0;}
+  }
+</style>
+</head>
+<body>
+
+<!-- 💕 Replace this with your actual photo -->
+<img src="your-photo.jpg" alt="Memory Pic" class="photo">
+
+<p>
+Par aap sabse alag ho, aap na sirf zyada nhi thodi si jhut bolti ho,<br><br>
+Ye bolna ki aapko Kisike jaane se farak nhi padta, kisi se farak nhi padta<br><br>
+Aap bohot hi ache dil ke ho,<br><br>
+Aapko pata tha ki meri matashri gau gyi thi toh aapne unki jagah le li, mujhe khane ke liye daat<br><br>
+Mujhe masti ke liye daat ti, Yaha tak ki khud khana leke deti<br><br>
+Ab pls padke ye sab band mat kar dena, bday hai aapka thoda toh taarif karne do 🥺 
+</p>
+
+<div class="btn-container">
+  <button onclick="nextPage()">Next Page ➤</button>
+</div>
+
+<script>
+  // Floating hearts animation
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = 4 + Math.random() * 2 + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+  setInterval(createHeart, 500);
+
+  // Next page redirect
+  function nextPage() {
+    window.location.href = "page8.html";
+  }
+</script>
+
+</body>
+</html>
