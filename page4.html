@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page 4 – Friendship Message</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #ffe0f0, #fff5e1);
+      color: #333;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h2 {
+      color: #e91e63;
+      font-size: 26px;
+      margin-top: 40px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    img {
+      width: 60%;
+      max-width: 400px;
+      opacity: 0;
+      transform: scale(0.8);
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      animation: photoAppear 2s forwards 1s;
+    }
+
+    #friendMessage {
+      font-size: 18px;
+      line-height: 1.8;
+      margin-top: 30px;
+      color: #444;
+    }
+
+    .line {
+      opacity: 0;
+    }
+
+    button {
+      margin-top: 35px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff4081;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #e91e63;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes photoAppear {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body onload="startPage4()">
+
+  <h2>Chalo bohot masti ho gyi. Abhi zara meri devi ke taarif mei aate hai ❤️</h2>
+
+  <!-- Replace this image with your own -->
+  <img id="friendImage" src="page4.jpg" alt="Our Friendship">
+
+  <div id="friendMessage">
+    <p class="line">Humari dosti life ki sabse purest unexpected aur never ending dosti hai ☺️</p>
+    <p class="line">Hum dost bane they filhall soil internship ke baad,</p>
+    <p class="line">Aur dhere dhere kaise itni badi hume pata hi nhi chala,</p>
+    <p class="line">Ye keh sakte hai ki bhagwan ne ye sab plan Kiye the kyuki itni achi sirf upar wala hi plan kar sakta hai,</p>
+    <p class="line">Haa pehle pehle aapko mujhpe bharosa nhi hua tha, lekin mai bhi toh aapka bhakt hu aakhir kaar aapka bharosa jit liya,</p>
+    <p class="line">Ab aap meri itni achi dost ho ki aap meri devi ho.</p>
+  </div>
+
+  <button onclick="goToNextPage()">Next Page ➜</button>
+
+  <audio id="page4song" loop>
+    <source src="page4song.mp3" type="audio/mp3" />
+  </audio>
+
+  <script>
+    // Animate lines one by one
+    function showLinesSequentially() {
+      const lines = document.querySelectorAll(".line");
+      lines.forEach((line, index) => {
+        setTimeout(() => {
+          line.style.transition = "opacity 1s ease";
+          line.style.opacity = 1;
+        }, index * 1200);
+      });
+    }
+
+    // Autoplay looping music
+    function playMusic() {
+      const music = document.getElementById("page4song");
+      music.volume = 0.6;
+      const playPromise = music.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          document.body.addEventListener("click", () => music.play(), { once: true });
+        });
+      }
+    }
+
+    function startPage4() {
+      showLinesSequentially();
+      playMusic();
+    }
+
+    function goToNextPage() {
+      window.location.href = "page5.html";
+    }
+  </script>
+</body>
+</html>
