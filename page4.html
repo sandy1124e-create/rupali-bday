@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page 4</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #ffe6f9, #fff0f6);
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    color: #5a005a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  img {
+    width: 250px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    animation: fadeIn 2s ease;
+    margin-bottom: 25px;
+  }
+  p {
+    width: 80%;
+    max-width: 700px;
+    font-size: 1.2em;
+    line-height: 1.7;
+    background: rgba(255,255,255,0.6);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(255,105,180,0.3);
+    animation: fadeIn 3s ease;
+  }
+  button {
+    margin-top: 30px;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 10px;
+    background: #ff5db1;
+    color: white;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(255,105,180,0.4);
+  }
+  button:hover { background: #e60073; transform: scale(1.05); }
+  @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+  /* Hidden overlay that tricks browser into allowing sound */
+  #soundUnlock {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    opacity: 0;
+    z-index: 10;
+  }
+</style>
+</head>
+<body>
+
+  <img src="page4-photo.jpg" alt="Photo">
+  <p>
+    Humari dosti life ki sabse purest unexpected aur never ending dosti hai ☺,<br><br>
+    Hum dost bane they filhall soil internship ke baad,<br>
+    Aur dhere dhere kaise itni badi hume pata hi nhi chala,<br><br>
+    Ye keh sakte hai ki bhagwan ne ye sab plan Kiye the kyuki itni achi sirf upar wala hi plan kar sakta hai,<br><br>
+    Haa pehle pehle aapko mujhpe bharosa nhi hua tha, lekin mai bhi toh aapka bhakt hu aakhir kaar aapka bharosa jit liya,<br>
+    ab aap meri itni achi dost ho ki aap meri devi ho.
+  </p>
+  <button onclick="nextPage()">Next Page ➤</button>
+
+  <audio id="bgSong" src="page4song.mp3" loop></audio>
+  <div id="soundUnlock"></div>
+
+<script>
+const audio = document.getElementById("bgSong");
+const unlock = document.getElementById("soundUnlock");
+
+window.addEventListener("load", () => {
+  // Simulate a click on invisible overlay after load
+  setTimeout(() => {
+    unlock.click();
+  }, 100);
+});
+
+unlock.addEventListener("click", () => {
+  audio.muted = false;
+  audio.volume = 1;
+  audio.play().catch(err => console.log("Autoplay blocked:", err));
+  unlock.remove(); // remove the invisible layer
+});
+
+function nextPage() {
+  window.location.href = "page5.html";
+}
+</script>
+</body>
+</html>
