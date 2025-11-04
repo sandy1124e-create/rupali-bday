@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page 4 – Friendship Message</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #ffe6f2, #fff8e7);
+      color: #333;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Top line animation */
+    #topLine {
+      font-size: 20px;
+      color: #e91e63;
+      font-weight: 600;
+      margin-top: 20px;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: slideDown 2s ease forwards;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    img {
+      width: 40%;
+      max-width: 100px;
+      margin-top: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      transform: scale(0.7);
+      animation: photoReveal 2s 1.2s forwards ease-in-out;
+    }
+
+    @keyframes photoReveal {
+      0% { opacity: 0; transform: scale(0.7) rotate(-5deg); }
+      60% { opacity: 1; transform: scale(1.05) rotate(3deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    .nameTag {
+      font-size: 20px;
+      font-weight: 600;
+      margin-top: 10px;
+      color: #ff4081;
+      text-shadow: 0 0 10px rgba(255, 64, 129, 0.4);
+      letter-spacing: 1px;
+      opacity: 0;
+      animation: fadeIn 2s 2.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    #friendMessage {
+      font-size: 18px;
+      line-height: 1.8;
+      margin: 40px auto;
+      width: 80%;
+      max-width: 600px;
+      color: #444;
+      text-shadow: 0 0 8px rgba(255, 192, 203, 0.4);
+      min-height: 250px;
+    }
+
+    .word {
+      opacity: 0;
+      display: inline-block;
+      margin-right: 4px;
+      transform: translateY(10px);
+    }
+
+    @keyframes fadeInWord {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff4081;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+      transition: 0.3s;
+      opacity: 0;
+    }
+
+    button:hover {
+      background-color: #e91e63;
+      transform: scale(1.05);
+    }
+
+    /* Floating Hearts */
+    .heart {
+      position: fixed;
+      bottom: -10px;
+      font-size: 20px;
+      opacity: 0.8;
+      animation: floatUp 6s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body onload="startPage4()">
+  <div id="topLine"></div>
+
+  <img src="page5.jpg" alt="Photo" id="photo" />
+  <div class="nameTag">Rupali Devi ✨</div>
+
+  <div id="friendMessage"></div>
+  <button id="nextBtn" onclick="goToNextPage()">Next Page ➜</button>
+
+  <audio id="page4Music" loop>
+    <source src="page5song.mp3" type="audio/mp3" />
+  </audio>
+
+  <script>
+    const messageText = `
+      Humare bich bohot saare jhagde hue hai chahe wo meri galti ho ya fir koi saap ki, dyne aag laga ke gye ho, Par har baar kaise pata nhi hum zyada ache dost bante gye, Kabhi kabhi mai bhi srsly ghusse mei aa jata hu toh kaise pata nhi aap manane aa jate ho, Kabhi bhagwan se aapke liye dua mangta hu toh aap maan jaate ho. Toh ab mujhe iss baat ka dar nhi ki humara jhagda hoga ki nhi Hoga bhi toh app ghumke aa hi jaoge aapne bola hi hai aur mai toh hu hi manane ke liye,
+    `;
+
+    const heartColors = ["", "", "", ""];
+    let heartInterval;
+
+    // Floating Hearts
+    function createHearts() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = heartColors[Math.floor(Math.random() * heartColors.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 15 + 10 + "px";
+      heart.style.animationDuration = Math.random() * 3 + 5 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }
+
+    function startHearts() {
+      heartInterval = setInterval(createHearts, 400);
+    }
+
+    function showMessageWordByWord() {
+      const container = document.getElementById("friendMessage");
+      const words = messageText.trim().split(/\s+/);
+      let index = 0;
+
+      const interval = setInterval(() => {
+        if (index < words.length) {
+          const span = document.createElement("span");
+          span.className = "word";
+          span.textContent = words[index] + " ";
+          container.appendChild(span);
+          setTimeout(() => {
+            span.style.opacity = 1;
+            span.style.animation = "fadeInWord 1s ease forwards";
+          }, 50);
+          index++;
+        } else {
+          clearInterval(interval);
+          setTimeout(() => {
+            document.getElementById("nextBtn").style.transition = "opacity 1.5s ease";
+            document.getElementById("nextBtn").style.opacity = 1;
+          }, 2000);
+        }
+      }, 400); // slow for human-like reading
+    }
+
+    function playMusic() {
+      const music = document.getElementById("page4Music");
+      music.volume = 1.0;
+      const playPromise = music.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          document.body.addEventListener("click", () => music.play(), { once: true });
+        });
+      }
+    }
+
+    function startPage4() {
+      playMusic();
+      // start message and hearts after name appears
+      setTimeout(() => {
+        startHearts();
+        showMessageWordByWord();
+      }, 3000);
+    }
+
+    function goToNextPage() {
+      clearInterval(heartInterval);
+      window.location.href = "page6.html";
+    }
+  </script>
+</body>
+</html>
