@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cake Cutting Time 🎂</title>
+<style>
+  body {
+    margin: 0;
+    background: radial-gradient(circle at center, #fff0f5 0%, #ffe6f2 100%);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: "Poppins", sans-serif;
+    color: #5a004c;
+  }
+
+  h1 {
+    font-size: 2.3em;
+    text-align: center;
+    animation: fadeIn 2s ease;
+  }
+
+  p {
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .cake-container {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin-top: 30px;
+    display: none;
+  }
+
+  .cake {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  }
+
+  /* two halves for split effect */
+  .cake-half {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .left-half img {
+    position: absolute;
+    left: 0;
+  }
+
+  .right-half img {
+    position: absolute;
+    right: 0;
+  }
+
+  .candles {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+  }
+
+  .candle {
+    width: 10px;
+    height: 40px;
+    background: #ff6fa0;
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .flame {
+    width: 10px;
+    height: 15px;
+    background: radial-gradient(circle, gold, orange);
+    border-radius: 50%;
+    position: absolute;
+    top: -18px;
+    left: 0;
+    animation: flicker 0.2s infinite alternate;
+  }
+
+  @keyframes flicker {
+    from {transform: scale(1);}
+    to {transform: scale(1.2);}
+  }
+
+  .knife {
+    position: absolute;
+    right: -50px;
+    top: 60%;
+    width: 100px;
+    height: 10px;
+    background: silver;
+    transform: rotate(30deg);
+    border-radius: 5px;
+    display: none;
+  }
+
+  @keyframes cutCake {
+    0% {right: -50px; top: 60%;}
+    50% {right: 80px; top: 45%;}
+    100% {right: -50px; top: 60%;}
+  }
+
+  @keyframes moveLeft {
+    from {transform: translateX(0);}
+    to {transform: translateX(-40px);}
+  }
+
+  @keyframes moveRight {
+    from {transform: translateX(0);}
+    to {transform: translateX(40px);}
+  }
+
+  button {
+    margin-top: 25px;
+    padding: 12px 28px;
+    border: none;
+    background: #ff66b2;
+    color: white;
+    font-size: 1.1em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(255,105,180,0.5);
+  }
+  button:hover {background:#e60073; transform:scale(1.05);}
+
+  #message {
+    display: none;
+    font-size: 1.4em;
+    margin-top: 25px;
+    animation: fadeIn 1.5s ease;
+  }
+
+  #piano {
+    display: none;
+    margin-top: 40px;
+    animation: fadeIn 2s ease;
+  }
+
+  .key {
+    display: inline-block;
+    width: 25px;
+    height: 100px;
+    background: white;
+    border: 1px solid #999;
+    border-radius: 3px;
+    margin: 0 2px;
+    animation: playKeys 1s infinite;
+  }
+
+  @keyframes playKeys {
+    0%,100% {background:white;}
+    50% {background:#ffb6c1;}
+  }
+
+  #video {
+    display: none;
+    width: 350px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    animation: fadeIn 2s ease;
+  }
+
+  @keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+  }
+</style>
+</head>
+<body>
+
+<h1 id="title">🎂 Cake Cutting Time 🎂</h1>
+<p id="subtitle">ab kya pata kal mai aapke saath cake kaat pau ki nhi...</p>
+
+<button id="startBtn" onclick="startCake()">Start Cake Cutting 🍰</button>
+
+<div class="cake-container" id="cakeContainer">
+  <div class="cake-half left-half" id="leftHalf">
+    <img src="cake.png" alt="Cake Left" class="cake">
+  </div>
+  <div class="cake-half right-half" id="rightHalf">
+    <img src="cake.png" alt="Cake Right" class="cake">
+  </div>
+
+  <div class="candles" id="candles">
+    <div class="candle"><div class="flame"></div><span style="position:absolute;top:50px;left:-3px;font-weight:bold;">2</span></div>
+    <div class="candle"><div class="flame"></div><span style="position:absolute;top:50px;left:-3px;font-weight:bold;">0</span></div>
+  </div>
+
+  <div class="knife" id="knife"></div>
+</div>
+
+<button id="blowBtn" style="display:none;" onclick="blowCandles()">Blow Candles 💨</button>
+<button id="cutBtn" style="display:none;" onclick="cutCake()">Cut Cake 🔪</button>
+
+<div id="message">Cake cut ho gaya kha lo Devi 🍰💗</div>
+
+<div id="piano">
+  <div class="key"></div><div class="key"></div><div class="key"></div>
+  <div class="key"></div><div class="key"></div><div class="key"></div>
+  <div class="key"></div>
+</div>
+
+<audio id="birthdaypiano" src="birthdaypiano.mp3" loop></audio>
+
+<video id="video" controls autoplay>
+  <source src="page12video.mp4" type="video/mp4">
+</video>
+
+<button id="nextBtn" style="display:none;" onclick="nextPage()">Next Page ➤</button>
+
+<script>
+function startCake() {
+  document.getElementById("title").style.display = "none";
+  document.getElementById("subtitle").style.display = "none";
+  document.getElementById("startBtn").style.display = "none";
+  document.getElementById("cakeContainer").style.display = "block";
+  document.getElementById("blowBtn").style.display = "inline-block";
+
+  const song = document.getElementById("birthdaySong");
+  song.play().catch(()=>{});
+}
+
+function blowCandles() {
+  document.querySelectorAll(".flame").forEach(f => f.style.display = "none");
+  document.getElementById("blowBtn").style.display = "none";
+  document.getElementById("cutBtn").style.display = "inline-block";
+}
+
+function cutCake() {
+  const knife = document.getElementById("knife");
+  knife.style.display = "block";
+  knife.style.animation = "cutCake 1.2s ease forwards";
+
+  document.getElementById("piano").style.display = "block";
+
+  // After knife animation, split the cake halves
+  setTimeout(() => {
+    document.getElementById("leftHalf").style.animation = "moveLeft 1.2s forwards";
+    document.getElementById("rightHalf").style.animation = "moveRight 1.2s forwards";
+  }, 1200);
+
+  // Hide animation, show video and message
+  setTimeout(() => {
+    document.getElementById("cakeContainer").style.display = "none";
+    document.getElementById("piano").style.display = "none";
+    document.getElementById("message").style.display = "block";
+    const vid = document.getElementById("video");
+    vid.style.display = "block";
+    vid.play();
+    document.getElementById("nextBtn").style.display = "inline-block";
+  }, 3000);
+}
+
+function nextPage() {
+  window.location.href = "page13.html";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page 14 - Feedback</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    text-align: center;
+    color: #4a0033;
+  }
+
+  h1 {
+    margin-top: 40px;
+    font-size: 26px;
+    animation: fadeIn 2s ease-in-out;
+  }
+
+  .hearts {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .heart {
+    position: absolute;
+    bottom: -10px;
+    font-size: 20px;
+    animation: floatUp 5s linear infinite;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-100vh) scale(0.8); opacity: 0; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    margin-top: 40px;
+    padding: 20px;
+  }
+
+  .message {
+    font-size: 18px;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    animation: fadeIn 2s ease-in-out;
+  }
+
+  .rating {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .rating button {
+    background-color: #ffb6c1;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+  }
+
+  .rating button:hover,
+  .rating button.selected {
+    background-color: #ff69b4;
+    color: white;
+    transform: scale(1.2);
+  }
+
+  textarea {
+    width: 80%;
+    height: 80px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    resize: none;
+    font-size: 16px;
+    outline: none;
+  }
+
+  button.submit, button.view {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: none;
+    background-color: #ff4081;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+  }
+
+  button.submit:hover, button.view:hover {
+    background-color: #d81b60;
+    transform: scale(1.05);
+  }
+
+  .responses {
+    display: none;
+    margin-top: 30px;
+    background: #fff3f8;
+    padding: 15px;
+    border-radius: 15px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .password-section {
+    display: none;
+    margin-top: 20px;
+  }
+
+  input[type="password"] {
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 180px;
+    outline: none;
+  }
+
+  .photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-top: 20px;
+    animation: photoAppear 3s ease-in-out;
+  }
+
+  @keyframes photoAppear {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  audio {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="hearts" id="hearts-container"></div>
+
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+  <img src="your-photo.jpg" alt="Photo" class="photo">
+
+  <h1>💖 THANKS DEVI MERI BANAYI HUI WEBSITE PURI DEKHNE KE LIYE BINA SKIP KIYE, YE BHI EK GIFT SAMAJH LENA MERI TARAF SE 💖</h1>
+
+  <div class="message" id="message">
+    MAI ABHI UTNA PROFESSIONAL CODER/WEBSITE CREATOR TOH NHI HU<br><br>
+    PAR FIR BHI BOHOT MEHNAT SE BANAYI HAI YE WEBSITE<br><br>
+    1.5 MAHINE SE BANA RHA HU YE, JAB TAK AAP YE DEKHOGE 2 MAHINE TAK HO JAYENGE<br><br>
+    AB BAS NICHE EK DUM GENUINE RATING DIJIYE<br><br>
+  </div>
+
+  <h2>Rate kijiye, ekdum genuine rating dena acha toh aapki marzi, aur bura toh 0 do mujhe bura nhi lagega (1 se 10 tak rate karna):</h2>
+  <div class="rating" id="rating"></div>
+
+  <textarea id="feedback" placeholder="Bataiye kaisa laga ye Devi..."></textarea><br>
+  <button class="submit" onclick="submitFeedback()">Submit</button>
+  <button class="view" onclick="showPassword()">View Responses</button>
+
+  <div class="password-section" id="password-section">
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <button onclick="checkPassword()">Access</button>
+  </div>
+
+  <div class="responses" id="responses"></div>
+</div>
+
+<script>
+  // Create rating buttons
+  const ratingDiv = document.getElementById('rating');
+  let selectedRating = null;
+  for (let i = 1; i <= 10; i++) {
+    const btn = document.createElement('button');
+    btn.textContent = i;
+    btn.onclick = () => {
+      selectedRating = i;
+      document.querySelectorAll('.rating button').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    };
+    ratingDiv.appendChild(btn);
+  }
+
+  // Submit feedback
+  function submitFeedback() {
+    const feedback = document.getElementById('feedback').value.trim();
+    if (!selectedRating) {
+      alert("Please select a rating first!");
+      return;
+    }
+    const entry = { rating: selectedRating, feedback };
+    let allFeedback = JSON.parse(localStorage.getItem('feedbackData')) || [];
+    allFeedback.push(entry);
+    localStorage.setItem('feedbackData', JSON.stringify(allFeedback));
+    alert("aapka feedback submit ho gaya deviii 💖");
+    document.getElementById('feedback').value = '';
+    selectedRating = null;
+    document.querySelectorAll('.rating button').forEach(b => b.classList.remove('selected'));
+  }
+
+  // Password protected view
+  function showPassword() {
+    document.getElementById('password-section').style.display = 'block';
+  }
+
+  function checkPassword() {
+    const password = document.getElementById('passwordInput').value;
+    const responsesDiv = document.getElementById('responses');
+    if (password === "monu2226") {
+      const data = JSON.parse(localStorage.getItem('feedbackData')) || [];
+      if (data.length === 0) {
+        responsesDiv.innerHTML = "<p>No responses yet.</p>";
+      } else {
+        responsesDiv.innerHTML = "<h3>Responses:</h3>" + data.map((d, i) => `
+          <p><b>#${i + 1}</b> - Rating: ${d.rating}/10<br>Message: ${d.feedback || 'No message'}</p>
+        `).join("<hr>");
+      }
+      responsesDiv.style.display = 'block';
+    } else {
+      alert("Ye section aapke liye nhi hai devi, Ye mere responses dekhne ke liye hai ki aapko kaisa laga krke, byeeee, thankQ ❤️");
+    }
+  }
+
+  // Heart animation
+  const hearts = ["❤️","💖","💜","💙","💚","🧡","💛","💗","💓"];
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (3 + Math.random() * 5) + 's';
+    document.getElementById('hearts-container').appendChild(heart);
+    setTimeout(() => heart.remove(), 8000);
+  }
+  setInterval(createHeart, 400);
+</script>
+</body>
+</html>
