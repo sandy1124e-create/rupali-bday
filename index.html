@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
+ <script>
+  // Countdown unlock date — change only if needed
+  const unlockDate = new Date("Nov 22, 2025 00:00:00").getTime();
+  const now = new Date().getTime();
+
+  // If today's date is before the unlock date → go to countdown page
+  if (now < unlockDate) {
+    window.location.href = "page0.html";
+  }
+</script> 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Birthday Access 🎂</title>
@@ -83,6 +92,7 @@
 
 </body>
 </html>
+
 
 
 
